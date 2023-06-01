@@ -1,0 +1,110 @@
+body{
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url("./universo2.jpg");
+}
+
+html{
+  height: 100%;
+}
+
+/* Estilos gerais */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 50%;
+  left: 50%;
+  border-radius: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 36px;
+  color: white;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  flex-basis: 100%;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+}
+
+input[type="text"],
+input[type="number"] {
+  flex-basis: 100%;
+  height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  color: #333;
+}
+
+input[type="submit"] {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 5px;
+  background-color: #f2c200;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Estilos responsivos */
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    height: 30px;
+    font-size: 16px;
+  }
+
+  input[type="submit"] {
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+/* Cores */
+label,
+input[type="text"],
+input[type="number"] {
+  background-color: #f2f2f2;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+}
+
+label {
+  color: #333;
+}
+
+input[type="text"],
+input[type="number"] {
+  color: #333;
+}
+
+input[type="submit"] {
+  color: #fff;
+}
+.container{
+  
+}
+
+  

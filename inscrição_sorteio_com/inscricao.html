@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Expres_Sorte</title>
+    <link rel="stylesheet" href="./inscricao.css">
+    <script>
+      function validarCodigo() {
+        var codigoVip = document.getElementById("codigovip").value;
+        var codigosValidos = ["002312", "002313", "002314", "002315", "002316", "002317", "004201", "004202", "004203", "004204"];
+        if (codigosValidos.indexOf(codigoVip) === -1) {
+          alert("Código VIP inválido.");
+          return false;
+        }
+        return true;
+      }
+    </script>
+
+    <script>
+      // Cria uma nova instância do objeto XMLHttpRequest
+      var xhr = new XMLHttpRequest();
+    
+      // Define a URL do arquivo Excel com os números válidos
+      var url = './numeros.xlsx';
+    
+      // Abre a conexão com o arquivo Excel
+      xhr.open('GET', url, true);
+    
+      // Define o tipo de resposta esperado como um array buffer
+      xhr.responseType = 'arraybuffer';
+    
+      // Quando o arquivo Excel é carregado, processa os dados
+      xhr.onload = function() {
+        // Obtém os dados do arquivo Excel como um array buffer
+        var arrayBuffer = xhr.response;
+    
+        // Cria um novo objeto para ler o arquivo Excel
+        var workbook = XLSX.read(arrayBuffer, {type: 'array'});
+    
+        // Obtém a planilha com os números válidos
+        var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+    
+        // Cria um array para armazenar os números válidos
+        var numerosValidos = [];
+    
+        // Percorre as células da planilha para obter os números válidos
+        for (var cell in worksheet) {
+          // Pula as células que não são números de inscrição
+          if (cell[0] === '!') continue;
+          if (!cell.match(/^[A-Z]+1$/)) continue;
+    
+          // Obtém o valor da célula e adiciona ao array de números válidos
+          var numero = worksheet[cell].v;
+          numerosValidos.push(numero);
+        }
+    
+        // Define a função de validação para o campo "numero_sorteio"
+        function validarNumero() {
+          var numero = document.getElementById("numero_sorteio").value;
+          if (numerosValidos.indexOf(numero) === -1) {
+            alert("Número de inscrição inválido.");
+            return false;
+          }
+          return true;
+        }
+    
+        // Adiciona a função de validação ao evento "submit" do formulário
+        var form = document.getElementById("numero_sorteio");
+        form.addEventListener("submit", function(event) {
+          if (!validarNumero()) {
+            event.preventDefault();
+          }
+        });
+      };
+    
+      // Envia a requisição para carregar o arquivo Excel
+      xhr.send();
+    </script>
+
+    <script src="./dist/xlsx.full.min.js"></script>
+    
+  </head>
+  <body>
+    <div class="container">
+      <h1>Validação de Bilhete</h1>
+      <form action="processar.php" method="post" onsubmit="return validarCodigo()">
+
+        <input type="text" id="nome_completo" name="nome_completo" placeholder="Nome do Cliente" required><br><br>
+        <input type="text" id="cpf" name="cpf" autocomplete="off" maxlength="14" placeholder="CPF_Cliente" required ><br><br>
+        <script src="./validarcpf.js"></script>
+        <input type="number" id="numero_sorteio" name="numero_sorteio" placeholder="Numero de inscrição" required><br><br>
+        <input type="number" id="codigovip" name="codigovip" placeholder="Código_vip_vendedor"><br><br>
+        <input type="submit" value="Pagamento" onclick="window.location.href = '#';">
+
+      </form>
+    </div>
+
+  </body>
+</html>
+
